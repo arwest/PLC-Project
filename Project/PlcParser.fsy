@@ -133,7 +133,7 @@ Type :
 ;
 AtType :
      UNIT                                               { TupT []                       }
-   | BOOL                                               { BoolT                         }
+   | BOOL                                               { BooT                         }
    | INT                                                { IntT                          }
    | LPAR Type RPAR                                     { $2                            }
 ;

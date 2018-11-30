@@ -4,7 +4,7 @@ open Environ
 
 type plcType =
   | IntT                                (*  Int                     *)
-  | BoolT                                (*  Bool                    *)
+  | BooT                                (*  Bool                    *)
   | FunT of plcType * plcType           (*  type -> type            *)
   | TupT of plcType list                (*  Unit
                                             Tuple[type, ..., type]  *)
