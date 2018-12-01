@@ -95,7 +95,7 @@ type tokenId =
 type nonTerminalId = 
     | NONTERM__startMain
     | NONTERM_Main
-    | NONTERM_Decl
+    | NONTERM_Prog
     | NONTERM_Expr
     | NONTERM_AtExpr
     | NONTERM_AppExpr

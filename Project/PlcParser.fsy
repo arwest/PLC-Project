@@ -61,13 +61,13 @@
 
 /*  Add production rules below */
 Main :
-    Decl                                                { $1                              }
+    Prog EOF                                            { $1                              }
 ;
-Decl :
+Prog :
     Expr                                                { $1                              }
-  | VAR NAME EQ Expr SEMIC Decl                          { Let ($2, $4, $6)               }
-  | FUN NAME Args EQ Expr SEMIC Decl                    { Let ($2, makeAnon $3 $5, $7)    }
-  | FUN REC NAME Args COLON Type EQ Expr SEMIC Decl     { makeFunRec $3 $4 $6 $8 $10      }
+  | VAR NAME EQ Expr SEMIC Prog                         { Let ($2, $4, $6)                }
+  | FUN NAME Args EQ Expr SEMIC Prog                    { Let ($2, makeAnon $3 $5, $7)    }
+  | FUN REC NAME Args COLON Type EQ Expr SEMIC Prog     { makeFunRec $3 $4 $6 $8 $10      }
 ;
 Expr :
     AtExpr                                              { $1                              }
@@ -95,7 +95,7 @@ Expr :
 AtExpr :
     Const                                               { $1                              }
   | NAME                                                { Var $1                          }
-  | LBRACE Decl RBRACE                                  { $2                              }
+  | LBRACE Prog RBRACE                                  { $2                              }
   | LPAR Expr RPAR                                      { $2                              }
   | LPAR Comps RPAR                                     { Tuple $2                        }
   | FN Args DARROW Expr END                             { makeAnon $2 $4                  }
