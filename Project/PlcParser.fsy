@@ -79,7 +79,7 @@ Expr :
   | TAIL Expr                                           { Prim1 ("tl", $2)                }
   | ISE Expr                                            { Prim1 ("ise", $2)               }
   | PRINT Expr                                          { Prim1 ("print", $2)             }
-  | Expr PLUS Expr                                       { Prim2 ("+", $1, $3)            }
+  | Expr PLUS Expr                                      { Prim2 ("+", $1, $3)             }
   | Expr MINUS Expr                                     { Prim2 ("-", $1, $3)             }
   | Expr TIMES Expr                                     { Prim2 ("*", $1, $3)             }
   | Expr DIV Expr                                       { Prim2 ("/", $1, $3)             }
