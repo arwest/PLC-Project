@@ -10,14 +10,6 @@ let rec makeFunAux (n: int) (xs: (string * plcType) list) (e: expr) : expr =
 
 let makeType (l: (string * plcType) list): plcType = TupT (List.map (fun (x,y) -> y) l)
 
-let makeFun (f: string) (xs: (string * plcType) list) (e1: expr) (e2: expr) : expr = 
-  match xs with
-  | []           -> Let (f, Anon (etup, TupT [], e1) , e2)
-  | (x, t) :: [] -> Let (f, Anon (x, t, e1) , e2)
-  | _            -> let t = makeType xs in
-                    let e1' = makeFunAux 1 xs e1 in
-                    Let (f, Anon (tup, t, e1') , e2)
-
 let makeFunRec (f: string) (xs: (string * plcType) list) (rt: plcType) (e1: expr) (e2: expr) : expr =
   match xs with
   | []           -> Letrec (f, etup, TupT [], e1, rt, e2)   

@@ -405,7 +405,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 64 "PlcParser.fsy"
-                                                                               _1                            
+                                                                               _1                              
                    )
 # 64 "PlcParser.fsy"
                  : Absyn.expr));
@@ -416,7 +416,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 67 "PlcParser.fsy"
-                                                                               _1                            
+                                                                               _1                              
                    )
 # 67 "PlcParser.fsy"
                  : 'Decl));
@@ -429,7 +429,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 68 "PlcParser.fsy"
-                                                                                Let (_2, _4, _6)              
+                                                                                Let (_2, _4, _6)               
                    )
 # 68 "PlcParser.fsy"
                  : 'Decl));
@@ -443,7 +443,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 69 "PlcParser.fsy"
-                                                                               makeFun _2 _3 _5 _7           
+                                                                               Let (_2, makeFunAnon _3 _5, _7) 
                    )
 # 69 "PlcParser.fsy"
                  : 'Decl));
@@ -458,7 +458,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 70 "PlcParser.fsy"
-                                                                               makeFunRec _3 _4 _6 _8 _10    
+                                                                               makeFunRec _3 _4 _6 _8 _10      
                    )
 # 70 "PlcParser.fsy"
                  : 'Decl));
@@ -469,7 +469,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 73 "PlcParser.fsy"
-                                                                               _1                            
+                                                                               _1                              
                    )
 # 73 "PlcParser.fsy"
                  : 'Expr));
@@ -480,7 +480,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 74 "PlcParser.fsy"
-                                                                               _1                            
+                                                                               _1                              
                    )
 # 74 "PlcParser.fsy"
                  : 'Expr));
@@ -493,7 +493,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 75 "PlcParser.fsy"
-                                                                               If (_2, _4, _6)               
+                                                                               If (_2, _4, _6)                 
                    )
 # 75 "PlcParser.fsy"
                  : 'Expr));
@@ -504,7 +504,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 76 "PlcParser.fsy"
-                                                                               Prim1 ("!", _2)               
+                                                                               Prim1 ("!", _2)                 
                    )
 # 76 "PlcParser.fsy"
                  : 'Expr));
@@ -515,7 +515,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 77 "PlcParser.fsy"
-                                                                               Prim1 ("-", _2)               
+                                                                               Prim1 ("-", _2)                 
                    )
 # 77 "PlcParser.fsy"
                  : 'Expr));
@@ -526,7 +526,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 78 "PlcParser.fsy"
-                                                                               Prim1 ("hd", _2)              
+                                                                               Prim1 ("hd", _2)                
                    )
 # 78 "PlcParser.fsy"
                  : 'Expr));
@@ -537,7 +537,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 79 "PlcParser.fsy"
-                                                                               Prim1 ("tl", _2)              
+                                                                               Prim1 ("tl", _2)                
                    )
 # 79 "PlcParser.fsy"
                  : 'Expr));
@@ -548,7 +548,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 80 "PlcParser.fsy"
-                                                                               Prim1 ("ise", _2)             
+                                                                               Prim1 ("ise", _2)               
                    )
 # 80 "PlcParser.fsy"
                  : 'Expr));
@@ -559,7 +559,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 81 "PlcParser.fsy"
-                                                                               Prim1 ("print", _2)           
+                                                                               Prim1 ("print", _2)             
                    )
 # 81 "PlcParser.fsy"
                  : 'Expr));
@@ -571,7 +571,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 82 "PlcParser.fsy"
-                                                                                Prim2 ("+", _1, _3)           
+                                                                                Prim2 ("+", _1, _3)            
                    )
 # 82 "PlcParser.fsy"
                  : 'Expr));
@@ -583,7 +583,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 83 "PlcParser.fsy"
-                                                                               Prim2 ("-", _1, _3)           
+                                                                               Prim2 ("-", _1, _3)             
                    )
 # 83 "PlcParser.fsy"
                  : 'Expr));
@@ -595,7 +595,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 84 "PlcParser.fsy"
-                                                                               Prim2 ("*", _1, _3)           
+                                                                               Prim2 ("*", _1, _3)             
                    )
 # 84 "PlcParser.fsy"
                  : 'Expr));
@@ -607,7 +607,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 85 "PlcParser.fsy"
-                                                                               Prim2 ("/", _1, _3)           
+                                                                               Prim2 ("/", _1, _3)             
                    )
 # 85 "PlcParser.fsy"
                  : 'Expr));
@@ -619,7 +619,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 86 "PlcParser.fsy"
-                                                                               Prim2 ("=", _1, _3)           
+                                                                               Prim2 ("=", _1, _3)             
                    )
 # 86 "PlcParser.fsy"
                  : 'Expr));
@@ -631,7 +631,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 87 "PlcParser.fsy"
-                                                                               Prim2 ("!=", _1, _3)          
+                                                                               Prim2 ("!=", _1, _3)            
                    )
 # 87 "PlcParser.fsy"
                  : 'Expr));
@@ -643,7 +643,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 88 "PlcParser.fsy"
-                                                                               Prim2 ("&&", _1, _3)          
+                                                                               Prim2 ("&&", _1, _3)            
                    )
 # 88 "PlcParser.fsy"
                  : 'Expr));
@@ -655,7 +655,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 89 "PlcParser.fsy"
-                                                                               Prim2 ("<", _1, _3)           
+                                                                               Prim2 ("<", _1, _3)             
                    )
 # 89 "PlcParser.fsy"
                  : 'Expr));
@@ -667,7 +667,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 90 "PlcParser.fsy"
-                                                                               Prim2 ("<=", _1, _3)          
+                                                                               Prim2 ("<=", _1, _3)            
                    )
 # 90 "PlcParser.fsy"
                  : 'Expr));
@@ -679,7 +679,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 91 "PlcParser.fsy"
-                                                                               Prim2 ("::", _1, _3)          
+                                                                               Prim2 ("::", _1, _3)            
                    )
 # 91 "PlcParser.fsy"
                  : 'Expr));
@@ -691,7 +691,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 92 "PlcParser.fsy"
-                                                                               Prim2 (";", _1, _3)           
+                                                                               Prim2 (";", _1, _3)             
                    )
 # 92 "PlcParser.fsy"
                  : 'Expr));
@@ -703,7 +703,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 93 "PlcParser.fsy"
-                                                                               Sel (_1, _3)                  
+                                                                               Sel (_1, _3)                    
                    )
 # 93 "PlcParser.fsy"
                  : 'Expr));
@@ -714,7 +714,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 96 "PlcParser.fsy"
-                                                                               _1                            
+                                                                               _1                              
                    )
 # 96 "PlcParser.fsy"
                  : 'AtExpr));
@@ -725,7 +725,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 97 "PlcParser.fsy"
-                                                                               Var _1                        
+                                                                               Var _1                          
                    )
 # 97 "PlcParser.fsy"
                  : 'AtExpr));
@@ -736,7 +736,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 98 "PlcParser.fsy"
-                                                                               _2                            
+                                                                               _2                              
                    )
 # 98 "PlcParser.fsy"
                  : 'AtExpr));
@@ -747,7 +747,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 99 "PlcParser.fsy"
-                                                                               _2                            
+                                                                               _2                              
                    )
 # 99 "PlcParser.fsy"
                  : 'AtExpr));
@@ -758,7 +758,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 100 "PlcParser.fsy"
-                                                                               Tuple _2                      
+                                                                               Tuple _2                        
                    )
 # 100 "PlcParser.fsy"
                  : 'AtExpr));
@@ -770,7 +770,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 101 "PlcParser.fsy"
-                                                                               makeFunAnon _2 _4             
+                                                                               makeFunAnon _2 _4               
                    )
 # 101 "PlcParser.fsy"
                  : 'AtExpr));
@@ -782,7 +782,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 104 "PlcParser.fsy"
-                                                                               Call (_1, _2)                 
+                                                                               Call (_1, _2)                   
                    )
 # 104 "PlcParser.fsy"
                  : 'AppExpr));
@@ -794,7 +794,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 105 "PlcParser.fsy"
-                                                                               Call (_1, _2)                 
+                                                                               Call (_1, _2)                   
                    )
 # 105 "PlcParser.fsy"
                  : 'AppExpr));
@@ -805,7 +805,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 108 "PlcParser.fsy"
-                                                                               ConB _1                       
+                                                                               ConB _1                         
                    )
 # 108 "PlcParser.fsy"
                  : 'Const));
@@ -816,7 +816,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 109 "PlcParser.fsy"
-                                                                               ConI _1                       
+                                                                               ConI _1                         
                    )
 # 109 "PlcParser.fsy"
                  : 'Const));
@@ -826,7 +826,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 110 "PlcParser.fsy"
-                                                                               Tuple []                      
+                                                                               Tuple []                        
                    )
 # 110 "PlcParser.fsy"
                  : 'Const));
@@ -837,7 +837,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 111 "PlcParser.fsy"
-                                                                               EList _5                      
+                                                                               EList _5                        
                    )
 # 111 "PlcParser.fsy"
                  : 'Const));
@@ -849,7 +849,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 114 "PlcParser.fsy"
-                                                                               [_1 ; _3]                     
+                                                                               [_1 ; _3]                       
                    )
 # 114 "PlcParser.fsy"
                  : 'Comps));
@@ -861,7 +861,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 115 "PlcParser.fsy"
-                                                                               _1 :: _3                      
+                                                                               _1 :: _3                        
                    )
 # 115 "PlcParser.fsy"
                  : 'Comps));
@@ -871,7 +871,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 118 "PlcParser.fsy"
-                                                                               Tuple []                      
+                                                                               Tuple []                        
                    )
 # 118 "PlcParser.fsy"
                  : 'Args));
@@ -882,7 +882,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 119 "PlcParser.fsy"
-                                                                               _2                            
+                                                                               _2                              
                    )
 # 119 "PlcParser.fsy"
                  : 'Args));
@@ -893,7 +893,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 122 "PlcParser.fsy"
-                                                                               [_1]                          
+                                                                               [_1]                            
                    )
 # 122 "PlcParser.fsy"
                  : 'Params));
@@ -905,7 +905,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 123 "PlcParser.fsy"
-                                                                                _1 :: _3                     
+                                                                                _1 :: _3                       
                    )
 # 123 "PlcParser.fsy"
                  : 'Params));
@@ -917,7 +917,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 126 "PlcParser.fsy"
-                                                                               (_1, _3)                      
+                                                                               (_1, _3)                        
                    )
 # 126 "PlcParser.fsy"
                  : 'TypedVar));
@@ -928,7 +928,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 129 "PlcParser.fsy"
-                                                                               _1                            
+                                                                               _1                              
                    )
 # 129 "PlcParser.fsy"
                  : 'Type));
@@ -939,7 +939,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 130 "PlcParser.fsy"
-                                                                               TupT _3                       
+                                                                               TupT _3                         
                    )
 # 130 "PlcParser.fsy"
                  : 'Type));
@@ -950,7 +950,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 131 "PlcParser.fsy"
-                                                                               LisT _3                       
+                                                                               LisT _3                         
                    )
 # 131 "PlcParser.fsy"
                  : 'Type));
@@ -962,7 +962,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 132 "PlcParser.fsy"
-                                                                               FunT (_1, _3)                 
+                                                                               FunT (_1, _3)                   
                    )
 # 132 "PlcParser.fsy"
                  : 'Type));
@@ -972,7 +972,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 135 "PlcParser.fsy"
-                                                                               TupT []                       
+                                                                               TupT []                         
                    )
 # 135 "PlcParser.fsy"
                  : 'AtType));
@@ -982,7 +982,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 136 "PlcParser.fsy"
-                                                                               BooT                         
+                                                                               BooT                            
                    )
 # 136 "PlcParser.fsy"
                  : 'AtType));
@@ -992,7 +992,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 137 "PlcParser.fsy"
-                                                                               IntT                          
+                                                                               IntT                            
                    )
 # 137 "PlcParser.fsy"
                  : 'AtType));
@@ -1003,7 +1003,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 138 "PlcParser.fsy"
-                                                                               _2                            
+                                                                               _2                              
                    )
 # 138 "PlcParser.fsy"
                  : 'AtType));
@@ -1015,7 +1015,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 141 "PlcParser.fsy"
-                                                                               [_1, _3]                      
+                                                                               [_1, _3]                        
                    )
 # 141 "PlcParser.fsy"
                  : 'Types));
@@ -1027,7 +1027,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 142 "PlcParser.fsy"
-                                                                               _1 :: _3                      
+                                                                               _1 :: _3                        
                    )
 # 142 "PlcParser.fsy"
                  : 'Types));
