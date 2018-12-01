@@ -1,0 +1,71 @@
+{
+module PlcLexer
+
+open Microsoft.FSharp.Text.Lexing
+open PlcParser;
+
+let lexemeAsString lexbuf = 
+    LexBuffer<char>.LexemeString lexbuf
+
+(* Start of outermost comment currently being scanned *)
+let commentStart = ref Position.Empty;  
+ 
+let commentDepth = ref 0;  (* Current comment nesting *)
+
+(* Distinguish keywords from identifiers: *)
+
+let keyword s =
+    match s with
+    | "true"    -> CSTBOOL true
+    | "false"   -> CSTBOOL false
+    | "Unit"    -> UNIT
+    | "Bool"    -> BOOL
+    | "Int"     -> INT
+    | "List"    -> LIST
+    | "Tuple"   -> TUPLE
+    | "fn"      -> FN
+    | "end"     -> END
+    | "var"     -> VAR
+    | "fun"     -> FUN
+    | "rec"     -> REC
+    | "if"      -> IF
+    | "then"    -> THEN
+    | "else"    -> ELSE 
+    | "hd"      -> HEAD
+    | "tl"      -> TAIL
+    | "ise"     -> ISE
+    | "print"   -> PRINT
+    | _         -> NAME s
+}
+
+rule Token = parse
+  | [' ' '\t' '\r'] { Token lexbuf }
+  | '\n'            { lexbuf.EndPos <- lexbuf.EndPos.NextLine; Token lexbuf }
+  | ['0'-'9']+      { CSTINT (System.Int32.Parse (lexemeAsString lexbuf)) }
+  | ['a'-'z''A'-'Z']['a'-'z''A'-'Z''0'-'9']*
+                    { keyword (lexemeAsString lexbuf) }
+  | "->"            { ARROW }
+  | "=>"            { DARROW }
+  | '!'             { NOT }
+  | "&&"            { AND }
+  | "::"            { CONS }
+  | '+'             { PLUS }
+  | '-'             { MINUS }
+  | '*'             { TIMES }
+  | '/'             { DIV }
+  | '='             { EQ }
+  | "!="            { NEQ }
+  | '<'             { LT }
+  | "<="            { LTE }
+  | '('             { LPAR }
+  | ')'             { RPAR }
+  | '{'             { LBRACE }
+  | '}'             { RBRACE }
+  | '['             { LBRACK }
+  | ']'             { RBRACK }
+  | '#'             { HASH }
+  | ','             { COMMA }
+  | ':'             { COLON }
+  | ';'             { SEMIC }
+  | eof             { EOF }
+  | _               { failwith "Lexer error: illegal symbol" }
