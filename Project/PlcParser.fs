@@ -443,7 +443,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 69 "PlcParser.fsy"
-                                                                               Let (_2, makeFunAnon _3 _5, _7) 
+                                                                               Let (_2, makeAnon _3 _5, _7)    
                    )
 # 69 "PlcParser.fsy"
                  : 'Decl));
@@ -571,7 +571,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 82 "PlcParser.fsy"
-                                                                                Prim2 ("+", _1, _3)            
+                                                                               Prim2 ("+", _1, _3)             
                    )
 # 82 "PlcParser.fsy"
                  : 'Expr));
@@ -770,7 +770,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 101 "PlcParser.fsy"
-                                                                               makeFunAnon _2 _4               
+                                                                               makeAnon _2 _4                  
                    )
 # 101 "PlcParser.fsy"
                  : 'AtExpr));
@@ -871,7 +871,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 118 "PlcParser.fsy"
-                                                                               Tuple []                        
+                                                                               []                              
                    )
 # 118 "PlcParser.fsy"
                  : 'Args));
@@ -1015,7 +1015,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 141 "PlcParser.fsy"
-                                                                               [_1, _3]                        
+                                                                               [_1; _3]                        
                    )
 # 141 "PlcParser.fsy"
                  : 'Types));
