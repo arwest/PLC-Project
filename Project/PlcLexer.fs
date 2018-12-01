@@ -8,11 +8,6 @@ open PlcParser;
 let lexemeAsString lexbuf = 
     LexBuffer<char>.LexemeString lexbuf
 
-(* Start of outermost comment currently being scanned *)
-let commentStart = ref Position.Empty;  
- 
-let commentDepth = ref 0;  (* Current comment nesting *)
-
 (* Distinguish keywords from identifiers: *)
 
 let keyword s =
@@ -38,7 +33,7 @@ let keyword s =
     | "print"   -> PRINT
     | _         -> NAME s
 
-# 41 "PlcLexer.fs"
+# 36 "PlcLexer.fs"
 let trans : uint16[] array = 
     [| 
     (* State 0 *)
@@ -117,149 +112,149 @@ and Token  (lexbuf : Microsoft.FSharp.Text.Lexing.LexBuffer<_>) = _fslex_Token  
 and _fslex_Token  _fslex_state lexbuf =
   match _fslex_tables.Interpret(_fslex_state,lexbuf) with
   | 0 -> ( 
-# 42 "PlcLexer.fsl"
+# 37 "PlcLexer.fsl"
                                      Token lexbuf 
-# 122 "PlcLexer.fs"
+# 117 "PlcLexer.fs"
           )
   | 1 -> ( 
-# 43 "PlcLexer.fsl"
+# 38 "PlcLexer.fsl"
                                      lexbuf.EndPos <- lexbuf.EndPos.NextLine; Token lexbuf 
-# 127 "PlcLexer.fs"
+# 122 "PlcLexer.fs"
           )
   | 2 -> ( 
-# 44 "PlcLexer.fsl"
+# 39 "PlcLexer.fsl"
                                      CSTINT (System.Int32.Parse (lexemeAsString lexbuf)) 
-# 132 "PlcLexer.fs"
+# 127 "PlcLexer.fs"
           )
   | 3 -> ( 
-# 46 "PlcLexer.fsl"
+# 41 "PlcLexer.fsl"
                                      keyword (lexemeAsString lexbuf) 
-# 137 "PlcLexer.fs"
+# 132 "PlcLexer.fs"
           )
   | 4 -> ( 
-# 47 "PlcLexer.fsl"
+# 42 "PlcLexer.fsl"
                                      ARROW 
-# 142 "PlcLexer.fs"
+# 137 "PlcLexer.fs"
           )
   | 5 -> ( 
-# 48 "PlcLexer.fsl"
+# 43 "PlcLexer.fsl"
                                      DARROW 
-# 147 "PlcLexer.fs"
+# 142 "PlcLexer.fs"
           )
   | 6 -> ( 
-# 49 "PlcLexer.fsl"
+# 44 "PlcLexer.fsl"
                                      NOT 
-# 152 "PlcLexer.fs"
+# 147 "PlcLexer.fs"
           )
   | 7 -> ( 
-# 50 "PlcLexer.fsl"
+# 45 "PlcLexer.fsl"
                                      AND 
-# 157 "PlcLexer.fs"
+# 152 "PlcLexer.fs"
           )
   | 8 -> ( 
-# 51 "PlcLexer.fsl"
+# 46 "PlcLexer.fsl"
                                      CONS 
-# 162 "PlcLexer.fs"
+# 157 "PlcLexer.fs"
           )
   | 9 -> ( 
-# 52 "PlcLexer.fsl"
+# 47 "PlcLexer.fsl"
                                      PLUS 
-# 167 "PlcLexer.fs"
+# 162 "PlcLexer.fs"
           )
   | 10 -> ( 
-# 53 "PlcLexer.fsl"
+# 48 "PlcLexer.fsl"
                                      MINUS 
-# 172 "PlcLexer.fs"
+# 167 "PlcLexer.fs"
           )
   | 11 -> ( 
-# 54 "PlcLexer.fsl"
+# 49 "PlcLexer.fsl"
                                      TIMES 
-# 177 "PlcLexer.fs"
+# 172 "PlcLexer.fs"
           )
   | 12 -> ( 
-# 55 "PlcLexer.fsl"
+# 50 "PlcLexer.fsl"
                                      DIV 
-# 182 "PlcLexer.fs"
+# 177 "PlcLexer.fs"
           )
   | 13 -> ( 
-# 56 "PlcLexer.fsl"
+# 51 "PlcLexer.fsl"
                                      EQ 
-# 187 "PlcLexer.fs"
+# 182 "PlcLexer.fs"
           )
   | 14 -> ( 
-# 57 "PlcLexer.fsl"
+# 52 "PlcLexer.fsl"
                                      NEQ 
-# 192 "PlcLexer.fs"
+# 187 "PlcLexer.fs"
           )
   | 15 -> ( 
-# 58 "PlcLexer.fsl"
+# 53 "PlcLexer.fsl"
                                      LT 
-# 197 "PlcLexer.fs"
+# 192 "PlcLexer.fs"
           )
   | 16 -> ( 
-# 59 "PlcLexer.fsl"
+# 54 "PlcLexer.fsl"
                                      LTE 
-# 202 "PlcLexer.fs"
+# 197 "PlcLexer.fs"
           )
   | 17 -> ( 
-# 60 "PlcLexer.fsl"
+# 55 "PlcLexer.fsl"
                                      LPAR 
-# 207 "PlcLexer.fs"
+# 202 "PlcLexer.fs"
           )
   | 18 -> ( 
-# 61 "PlcLexer.fsl"
+# 56 "PlcLexer.fsl"
                                      RPAR 
-# 212 "PlcLexer.fs"
+# 207 "PlcLexer.fs"
           )
   | 19 -> ( 
-# 62 "PlcLexer.fsl"
+# 57 "PlcLexer.fsl"
                                      LBRACE 
-# 217 "PlcLexer.fs"
+# 212 "PlcLexer.fs"
           )
   | 20 -> ( 
-# 63 "PlcLexer.fsl"
+# 58 "PlcLexer.fsl"
                                      RBRACE 
-# 222 "PlcLexer.fs"
+# 217 "PlcLexer.fs"
           )
   | 21 -> ( 
-# 64 "PlcLexer.fsl"
+# 59 "PlcLexer.fsl"
                                      LBRACK 
-# 227 "PlcLexer.fs"
+# 222 "PlcLexer.fs"
           )
   | 22 -> ( 
-# 65 "PlcLexer.fsl"
+# 60 "PlcLexer.fsl"
                                      RBRACK 
-# 232 "PlcLexer.fs"
+# 227 "PlcLexer.fs"
           )
   | 23 -> ( 
-# 66 "PlcLexer.fsl"
+# 61 "PlcLexer.fsl"
                                      HASH 
-# 237 "PlcLexer.fs"
+# 232 "PlcLexer.fs"
           )
   | 24 -> ( 
-# 67 "PlcLexer.fsl"
+# 62 "PlcLexer.fsl"
                                      COMMA 
-# 242 "PlcLexer.fs"
+# 237 "PlcLexer.fs"
           )
   | 25 -> ( 
-# 68 "PlcLexer.fsl"
+# 63 "PlcLexer.fsl"
                                      COLON 
-# 247 "PlcLexer.fs"
+# 242 "PlcLexer.fs"
           )
   | 26 -> ( 
-# 69 "PlcLexer.fsl"
+# 64 "PlcLexer.fsl"
                                      SEMIC 
-# 252 "PlcLexer.fs"
+# 247 "PlcLexer.fs"
           )
   | 27 -> ( 
-# 70 "PlcLexer.fsl"
+# 65 "PlcLexer.fsl"
                                      EOF 
-# 257 "PlcLexer.fs"
+# 252 "PlcLexer.fs"
           )
   | 28 -> ( 
-# 71 "PlcLexer.fsl"
+# 66 "PlcLexer.fsl"
                                      failwith "Lexer error: illegal symbol" 
-# 262 "PlcLexer.fs"
+# 257 "PlcLexer.fs"
           )
   | _ -> failwith "Token"
 

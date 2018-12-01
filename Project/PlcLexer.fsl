@@ -7,11 +7,6 @@ open PlcParser;
 let lexemeAsString lexbuf = 
     LexBuffer<char>.LexemeString lexbuf
 
-(* Start of outermost comment currently being scanned *)
-let commentStart = ref Position.Empty;  
- 
-let commentDepth = ref 0;  (* Current comment nesting *)
-
 (* Distinguish keywords from identifiers: *)
 
 let keyword s =
