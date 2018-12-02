@@ -45,12 +45,13 @@
 
 %right SEMIC ARROW
 %nonassoc IF
-%left ELSE              
+%left ELSE
+%left AND              
 %left EQ NEQ
 %left LT LTE
 %right CONS
 %left PLUS MINUS
-%left TIMES DIV AND
+%left TIMES DIV
 %nonassoc NOT HEAD TAIL ISE PRINT NAME
 %left HASH          
 
