@@ -458,7 +458,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 71 "PlcParser.fsy"
-                                                                               makeFunRec _3 _4 _6 _8 _10      
+                                                                               makeFun _3 _4 _6 _8 _10      
                    )
 # 71 "PlcParser.fsy"
                  : 'Prog));

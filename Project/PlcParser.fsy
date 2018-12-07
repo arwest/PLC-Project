@@ -68,7 +68,7 @@ Prog :
     Expr                                                { $1                              }
   | VAR NAME EQ Expr SEMIC Prog                         { Let ($2, $4, $6)                }
   | FUN NAME Args EQ Expr SEMIC Prog                    { Let ($2, makeAnon $3 $5, $7)    }
-  | FUN REC NAME Args COLON Type EQ Expr SEMIC Prog     { makeFunRec $3 $4 $6 $8 $10      }
+  | FUN REC NAME Args COLON Type EQ Expr SEMIC Prog     { makeFun $3 $4 $6 $8 $10      }
 ;
 Expr :
     AtExpr                                              { $1                              }
