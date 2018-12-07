@@ -3,7 +3,7 @@ module TestAux
 open Microsoft.FSharp.Text
 open Absyn
 open PlcParser
-// open PlcChecker
+open PlcChecker
 // open PlcInterp
 
 let insCaret (s: string) r c =
@@ -29,10 +29,11 @@ let test (s:string, e:expr, t: plcType, r:plcVal) =
   let lexbuf = Lexing.LexBuffer<char>.FromString(s) in
   try 
     let e1 = PlcParser.Main PlcLexer.Token lexbuf in
-    // let t1 = PlcChecker.teval e []
+    let t1 = PlcChecker.teval e []
     // let r1 = PlcInterp.eval e []
-    // if t = t1 && r = r1 then 0
-    if e = e1 then 0
+    // if t = t1 && r = r1 && e = e1 then 0
+    if t = t1 && e = e1 then 0
+    // if e = e1 then 0
     else
       printfn "\nAbstract syntax mismatch for program:\n\n\"%s\"" s; 
       printfn "\nExpected:\n%A" e; 

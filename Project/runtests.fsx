@@ -5,6 +5,8 @@
 #load "PlcParserAux.fs"
 #load "PlcParser.fs"
 #load "PlcLexer.fs"
+#load "PlcChecker.fs"
+#load "PlcInterp.fs"
 #load "Parse.fs"
 #load "TestAux.fs"
 
