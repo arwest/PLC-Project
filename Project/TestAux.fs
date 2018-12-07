@@ -25,7 +25,7 @@ let insCaret (s: string) r c =
     ;
     List.fold (fun x y -> y + "\n" + x) "" (ins r r')
 
-let test (s:string, e:expr) = //, t: plcType, r:plcVal) = 
+let test (s:string, e:expr, t: plcType, r:plcVal) = 
   let lexbuf = Lexing.LexBuffer<char>.FromString(s) in
   try 
     let e1 = PlcParser.Main PlcLexer.Token lexbuf in
