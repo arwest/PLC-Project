@@ -1,11 +1,15 @@
 module Test
 
 open Absyn
+// open PlcChecker
+// open PlcInterp
 
 let cases = 
   (
     let s = "0"
     let e = ConI 0
+    // let t = IntT
+    // let r = IntV 0 
     (s, e)
   ) :: (
    let s = "5+3*4"  
