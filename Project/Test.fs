@@ -229,8 +229,8 @@ let cases =
     let r = TupV []
     (s, e, t, r)
   ) :: (
-    let s = "1 + {var tmp = 9; x + x}"
-    let e = Prim2 ("+",ConI 1,Let ("tmp",ConI 9,Prim2 ("+",Var "x",Var "x")))
+    let s = "1 + {var x = 9; x + x}"
+    let e = Prim2 ("+",ConI 1,Let ("x",ConI 9,Prim2 ("+",Var "x",Var "x")))
     let t = IntT
     let r = IntV 19
     (s, e, t, r)
@@ -293,6 +293,12 @@ let cases =
     let e = Let ("f",Anon ("x",IntT,Anon ("y",IntT,Prim2 ("+",Var "x",Var "y"))), Call (Call (Var "f",ConI 3),ConI 4))
     let t = IntT
     let r = IntV 7
+    (s, e, t, r)
+  ) :: (
+    let s = "fun f (x:Int) = fn (y:Int) => x+y end; f(3)"
+    let e = Let ("f",Anon ("x",IntT,Anon ("y",IntT,Prim2 ("+",Var "x",Var "y"))), Call (Var "f",ConI 3))
+    let t = FunT (IntT, IntT)
+    let r = Clos ("", "y", Prim2 ("+", Var "x", Var "y"), [("x", IntV 3)])
     (s, e, t, r)
   ) :: (
     let s = "
