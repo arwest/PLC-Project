@@ -11,7 +11,7 @@ let rec eval (e : expr) (env : plcVal env) : plcVal =
     
     // | ConB _ -> BooT
     
-    // | EList t -> LisT t
+    // | EList t -> t
     
     // | Var v -> lookup env v
     
@@ -53,6 +53,7 @@ let rec eval (e : expr) (env : plcVal env) : plcVal =
     //     | ("<=", IntT, IntT) -> BooT
     //     | ("=", t1, t2) when t1 = t2 -> BooT
     //     | ("!=", t1, t2) when t1 = t2 -> BooT
+    //     | (";", _, t) -> t
     //     | _ -> failwith ("TypeChecker: Unknown operation " + op + " applied to type " + type2string te1 + " and type " + type2string te2)
     
     // | If (e1, e2, e3) -> 
@@ -75,6 +76,16 @@ let rec eval (e : expr) (env : plcVal env) : plcVal =
     //         else 
     //             failwith ("TypeChecker: Expected input type " + type2string xt + "; Observed input type " + type2string eType)
     //     | _ -> failwith ("TypeChecker: Function " + f + " is undefined")
+    // | Call (Call (f,e'), e) -> 
+    //     let crt = teval (Call (f,e')) env in
+    //     match crt with
+    //     | FunT (xt, rt) ->
+    //         let eType = teval e env
+    //         if eType = xt then
+    //             rt
+    //         else failwith ("TypeChecker: Expected input type " + type2string xt + "; Observed input type " + type2string eType)
+    //     | _ -> failwith ("TypeChecker: Internal function call returned insufficient type")
+
     // | Call _ -> failwith ("TypeChecker: Illegal call to a function")
 
     // | Tuple eList -> TupT (List.map (fun e -> teval e env) eList)
