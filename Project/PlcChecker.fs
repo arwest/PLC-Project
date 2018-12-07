@@ -9,7 +9,7 @@ let rec teval (e : expr) (env : plcType env) : plcType =
     
     | ConB _ -> BooT
     
-    | EList t -> LisT t
+    | EList t -> t
     
     | Var v -> lookup env v
     
