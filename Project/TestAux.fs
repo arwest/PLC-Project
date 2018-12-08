@@ -4,7 +4,7 @@ open Microsoft.FSharp.Text
 open Absyn
 open PlcParser
 open PlcChecker
-// open PlcInterp
+open PlcInterp
 
 let insCaret (s: string) r c =
   let mutable s' = "" in
@@ -30,14 +30,14 @@ let test (s:string, e:expr, t: plcType, r:plcVal) =
   try 
     let e1 = PlcParser.Main PlcLexer.Token lexbuf in
     let t1 = PlcChecker.teval e []
-    // let r1 = PlcInterp.eval e []
-    // if t = t1 && r = r1 && e = e1 then 0
-    if t = t1 && e = e1 then 0
+    let r1 = PlcInterp.eval e []
+    if t = t1 && r = r1 && e = e1 then 0
+    // if t = t1 && e = e1 then 0
     // if e = e1 then 0
     else
       printfn "\nAbstract syntax mismatch for program:\n\n\"%s\"" s; 
-      printfn "\nExpected:\n%A" e; 
-      printfn "\nGenerated:\n%A" e1;       
+      printfn "\nExpected:\n%A" r; 
+      printfn "\nGenerated:\n%A" r1;       
       1
   with 
   | exn -> let pos = lexbuf.EndPos in
