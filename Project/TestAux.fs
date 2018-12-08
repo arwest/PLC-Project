@@ -29,8 +29,8 @@ let test (s:string, e:expr, t: plcType, r:plcVal) =
   let lexbuf = Lexing.LexBuffer<char>.FromString(s) in
   try 
     let e1 = PlcParser.Main PlcLexer.Token lexbuf in
-    let t1 = PlcChecker.teval e []
-    let r1 = PlcInterp.eval e []
+    let t1 = PlcChecker.teval e1 []
+    let r1 = PlcInterp.eval e1 []
     if t = t1 && r = r1 && e = e1 then 0
     else
       printfn "\nAbstract syntax mismatch for program:\n\n\"%s\"" s; 

@@ -301,6 +301,12 @@ let cases =
     let r = IntV 12
     (s, e, t, r)
   ) :: (
+    let s = "fun h (x:Int, y:Int, z:Int) = x+y+z; h(3,4,5)"
+    let e = Let ("h",Anon ("$tuple",TupT [IntT; IntT; IntT], Let ("x",Sel (Var "$tuple",1), Let ("y",Sel (Var "$tuple",2), Let ("z", Sel (Var "$tuple", 3), Prim2 ("+",Prim2("+", Var "x", Var "y"), Var "z"))))), Call (Var "h", Tuple [ConI 3; ConI 4; ConI 5]))
+    let t = IntT
+    let r = IntV 12
+    (s, e, t, r)
+  ) :: (
     let s = "fun f (x:Int) = fn (y:Int) => x+y end; f(3)"
     let e = Let ("f",Anon ("x",IntT,Anon ("y",IntT,Prim2 ("+",Var "x",Var "y"))), Call (Var "f",ConI 3))
     let t = FunT (IntT, IntT)
