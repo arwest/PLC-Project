@@ -91,7 +91,7 @@ let cases =
     let s = "1 + {3}"
     let e = Prim2 ("+",ConI 1,ConI 3)
     let t = IntT
-    let r = IntV 3
+    let r = IntV 4
     (s, e, t, r)
   ) :: (
     let s = "print false"
@@ -298,7 +298,7 @@ let cases =
     let s = "fun f (x:Int) = fn (y:Int) => x+y end; f(3)"
     let e = Let ("f",Anon ("x",IntT,Anon ("y",IntT,Prim2 ("+",Var "x",Var "y"))), Call (Var "f",ConI 3))
     let t = FunT (IntT, IntT)
-    let r = Clos ("", "y", Prim2 ("+", Var "x", Var "y"), [("x", IntV 3)])
+    let r = Clos ("", "y", Prim2 ("+", Var "x", Var "y"), [("x", IntV 3); ("", Clos ("","x",Anon ("y",IntT,Prim2 ("+",Var "x",Var "y")),[]))])
     (s, e, t, r)
   ) :: (
     let s = "
@@ -337,6 +337,12 @@ let cases =
     let e = Letrec ("len","l",LisT IntT, If (Prim1 ("ise",Var "l"),ConI 0, Prim2 ("+",ConI 1,Call (Var "len",Prim1 ("tl",Var "l")))),IntT, Call (Var "len",Prim2 ("::",ConI 1,Prim2 ("::",ConI 2,EList (LisT IntT)))))
     let t = IntT
     let r = IntV 2
+    (s, e, t, r)
+  ) :: (
+    let s = "fn (x:Int, y:Int) => print(x - y) end"
+    let e = Anon ("$tuple",TupT [IntT; IntT], Let ("x",Sel (Var "$tuple",1), Let ("y",Sel (Var "$tuple",2), Prim1("print", Prim2 ("-",Var "x",Var "y")))))
+    let t = FunT (TupT [IntT; IntT], TupT [])
+    let r = Clos ("", "$tuple", Let ("x",Sel (Var "$tuple",1), Let ("y",Sel (Var "$tuple",2), Prim1("print", Prim2 ("-",Var "x",Var "y")))), [])
     (s, e, t, r)
   ) :: (
     let s = "fn (x:Int, y:Int) => x - y end"
