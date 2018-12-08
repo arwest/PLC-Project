@@ -32,12 +32,14 @@ let test (s:string, e:expr, t: plcType, r:plcVal) =
     let t1 = PlcChecker.teval e []
     let r1 = PlcInterp.eval e []
     if t = t1 && r = r1 && e = e1 then 0
-    // if t = t1 && e = e1 then 0
-    // if e = e1 then 0
     else
       printfn "\nAbstract syntax mismatch for program:\n\n\"%s\"" s; 
-      printfn "\nExpected:\n%A" r; 
-      printfn "\nGenerated:\n%A" r1;       
+      printfn "\nExpected Abstract Syntax:\n%A" e;
+      printfn "\nExpected Type:\n%A" t;
+      printfn "\nExpected Result:\n%A" r; 
+      printfn "\nGenerated Abstract Syntax:\n%A" e1;
+      printfn "\nGenerated Type:\n%A" t1;
+      printfn "\nGenerated Result:\n%A" r1;        
       1
   with 
   | exn -> let pos = lexbuf.EndPos in

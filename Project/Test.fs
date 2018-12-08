@@ -295,6 +295,12 @@ let cases =
     let r = IntV 7
     (s, e, t, r)
   ) :: (
+    let s = "fun h (x:Int) = fn (y:Int) => fn (z:Int)  => x+y+z end end; h(3)(4)(5)"
+    let e = Let ("h",Anon ("x",IntT,Anon ("y",IntT, Anon ("z", IntT, Prim2 ("+",Prim2("+", Var "x", Var "y"), Var "z")))), Call (Call (Call(Var "h", ConI 3),ConI 4),ConI 5))
+    let t = IntT
+    let r = IntV 12
+    (s, e, t, r)
+  ) :: (
     let s = "fun f (x:Int) = fn (y:Int) => x+y end; f(3)"
     let e = Let ("f",Anon ("x",IntT,Anon ("y",IntT,Prim2 ("+",Var "x",Var "y"))), Call (Var "f",ConI 3))
     let t = FunT (IntT, IntT)
