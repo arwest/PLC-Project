@@ -93,6 +93,29 @@ Expr :
   | Expr SEMIC Expr                                     { Prim2 (";", $1, $3)             }
   | Expr HASH CSTINT                                    { Sel ($1, $3)                    }
 ;
+
+LExpr :
+    AtExpr                                              { $1                              }
+  | AppExpr                                             { $1                              }
+  | IF LExpr THEN LExpr ELSE LExpr                      { If ($2, $4, $6)                 }
+  | NOT LExpr                                           { Prim1 ("!", $2)                 }
+  | MINUS LExpr                                         { Prim1 ("-", $2)                 }
+  | HEAD LExpr                                          { Prim1 ("hd", $2)                }
+  | TAIL LExpr                                          { Prim1 ("tl", $2)                }
+  | ISE LExpr                                           { Prim1 ("ise", $2)               }
+  | PRINT LExpr                                         { Prim1 ("print", $2)             }
+  | LExpr PLUS LExpr                                    { Prim2 ("+", $1, $3)             }
+  | LExpr MINUS LExpr                                   { Prim2 ("-", $1, $3)             }
+  | LExpr TIMES LExpr                                   { Prim2 ("*", $1, $3)             }
+  | LExpr DIV LExpr                                     { Prim2 ("/", $1, $3)             }
+  | LExpr EQ LExpr                                      { Prim2 ("=", $1, $3)             }
+  | LExpr NEQ LExpr                                     { Prim2 ("!=", $1, $3)            } 
+  | LExpr AND LExpr                                     { Prim2 ("&&", $1, $3)            }
+  | LExpr LT LExpr                                      { Prim2 ("<", $1, $3)             }
+  | LExpr LTE LExpr                                     { Prim2 ("<=", $1, $3)            }
+  | LExpr CONS LExpr                                    { Prim2 ("::", $1, $3)            }
+  | LExpr HASH CSTINT                                   { Sel ($1, $3)                    }
+;
 AtExpr :
     Const                                               { $1                              }
   | NAME                                                { Var $1                          }
@@ -109,7 +132,12 @@ Const :
     CSTBOOL                                             { ConB $1                         }
   | CSTINT                                              { ConI $1                         }
   | LPAR RPAR                                           { Tuple []                        }
+  | LBRACK ListComps RBRACK                             { $2                              }
   | LPAR LBRACK RBRACK COLON Type RPAR                  { EList $5                        }
+;
+ListComps :
+    LExpr                                               { Prim2("::", $1, makeListType $1)}
+  | LExpr SEMIC ListComps                               { Prim2("::", $1, $3)             }
 ;
 Comps :
     Expr COMMA Expr                                     { [$1 ; $3]                       }

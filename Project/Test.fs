@@ -52,6 +52,12 @@ let cases =
     let r = BooV true
     (s, e, t, r)
   ) :: (
+    let s = "()"
+    let e = Tuple []
+    let t = TupT []
+    let r = TupV []
+    (s, e, t, r)
+  ) :: (
     let s = "4 * (true; 6)"
     let e = Prim2 ("*",ConI 4,Prim2 (";",ConB true,ConI 6))
     let t = IntT
@@ -419,6 +425,12 @@ let cases =
     let e = Letrec ("map","f",FunT (IntT,IntT),Anon("l",LisT IntT,If(Prim1 ("ise",Var "l"),Var "l",Prim2("::",Call (Var "f",Prim1 ("hd",Var "l")),Call (Call (Var "map",Var "f"),Prim1 ("tl",Var "l"))))),FunT (LisT IntT,LisT IntT),Call(Call (Var "map",Anon ("x",IntT,Prim2 ("*",ConI 2,Var "x"))),Prim2 ("::",ConI 10,Prim2 ("::",ConI 20,Prim2 ("::",ConI 30,EList (LisT IntT))))))
     let t = LisT IntT
     let r = LisV [IntV 20; IntV 40; IntV 60]
+    (s, e, t, r)
+  ) :: (
+    let s = "[1;2;3;4]"
+    let e = Prim2("::", ConI 1, Prim2("::", ConI 2, Prim2("::", ConI 3, Prim2("::", ConI 4, EList (LisT IntT)))))
+    let t = LisT IntT
+    let r = LisV [IntV 1; IntV 2; IntV 3; IntV 4]
     (s, e, t, r)
   )
   :: []
