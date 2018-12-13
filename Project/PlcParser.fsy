@@ -67,8 +67,8 @@ Main :
 Prog :
     Expr                                                { $1                              }
   | VAR NAME EQ Expr SEMIC Prog                         { Let ($2, $4, $6)                }
-  | FUN NAME HighArgs EQ Expr SEMIC Prog                { Let ($2, makeAnonHigh $3 $5, $7)}
-  | FUN REC NAME HighArgs COLON Type EQ Expr SEMIC Prog { makeFunHigh $3 $4 $6 $8 $10     }
+  | FUN NAME Args EQ Expr SEMIC Prog                    { Let ($2, makeAnon $3 $5, $7)    }
+  | FUN REC NAME Args COLON Type EQ Expr SEMIC Prog     { makeFun $3 $4 $6 $8 $10      }
 ;
 Expr :
     AtExpr                                              { $1                              }
@@ -144,12 +144,8 @@ Comps :
   | Expr COMMA Comps                                    { $1 :: $3                        }
 ;
 Args :
-    LPAR RPAR                                           { []                              }
-  | LPAR Params RPAR                                    { $2                              }
-;
-HighArgs :
-    Args                                                { [$1]                            }
-    | Args HighArgs                                     {  $1 :: $2                       }
+     LPAR RPAR                                          { []                              }
+   | LPAR Params RPAR                                   { $2                              }
 ;
 Params :
     TypedVar                                            { [$1]                            }

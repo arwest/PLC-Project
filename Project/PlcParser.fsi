@@ -104,7 +104,6 @@ type nonTerminalId =
     | NONTERM_ListComps
     | NONTERM_Comps
     | NONTERM_Args
-    | NONTERM_HighArgs
     | NONTERM_Params
     | NONTERM_TypedVar
     | NONTERM_Type

@@ -301,24 +301,6 @@ let cases =
     let r = IntV 7
     (s, e, t, r)
   ) :: (
-    let s = "fun f (x:Int) = fn (y:Int) => x+y end; var v = f(3) ; v"
-    let e = Let ("f",Anon ("x",IntT,Anon ("y",IntT,Prim2 ("+",Var "x",Var "y"))), Let("v", Call (Var "f",ConI 3), Var("v")))
-    let t = FunT(IntT, IntT)
-    let r = Clos ("", "y", Prim2 ("+", Var "x", Var "y"), [("x", IntV 3); ("", Clos ("","x",Anon ("y",IntT,Prim2 ("+",Var "x",Var "y")),[]))])
-    (s, e, t, r)
-  ) :: (
-    let s = "fun f (x:Int) (y:Int) = x+y; f(3)(4)"
-    let e = Let ("f",Anon ("x",IntT,Anon ("y",IntT,Prim2 ("+",Var "x",Var "y"))), Let("v", Call (Var "f",ConI 3), Var("v")))
-    let t = FunT(IntT, IntT)
-    let r = Clos ("", "y", Prim2 ("+", Var "x", Var "y"), [("x", IntV 3); ("", Clos ("","x",Anon ("y",IntT,Prim2 ("+",Var "x",Var "y")),[]))])
-    (s, e, t, r)
-  ) :: (
-    let s = "fun f (x:Int) = fn (y:Int) => x+y end; var v = f(3) ; v(4)"
-    let e = Let ("f",Anon ("x",IntT,Anon ("y",IntT,Prim2 ("+",Var "x",Var "y"))), Let("v", Call (Var "f",ConI 3), Call(Var "v", ConI 4)))
-    let t = IntT
-    let r = IntV 7
-    (s, e, t, r)
-  ) :: (
     let s = "fun h (x:Int) = fn (y:Int) => fn (z:Int)  => x+y+z end end; h(3)(4)(5)"
     let e = Let ("h",Anon ("x",IntT,Anon ("y",IntT, Anon ("z", IntT, Prim2 ("+",Prim2("+", Var "x", Var "y"), Var "z")))), Call (Call (Call(Var "h", ConI 3),ConI 4),ConI 5))
     let t = IntT
