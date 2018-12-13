@@ -421,7 +421,7 @@ let cases =
       fn (l: List[Int]) =>
         if ise(l) then l else f(hd(l)) :: map(f)(tl(l))
       end ;
-    map (fn (x:Int) => 2*x end) (10::20::30::([] : List[Int]))"
+    map (fn (x:Int) => 2*x end) ([10;20;30])"
     let e = Letrec ("map","f",FunT (IntT,IntT),Anon("l",LisT IntT,If(Prim1 ("ise",Var "l"),Var "l",Prim2("::",Call (Var "f",Prim1 ("hd",Var "l")),Call (Call (Var "map",Var "f"),Prim1 ("tl",Var "l"))))),FunT (LisT IntT,LisT IntT),Call(Call (Var "map",Anon ("x",IntT,Prim2 ("*",ConI 2,Var "x"))),Prim2 ("::",ConI 10,Prim2 ("::",ConI 20,Prim2 ("::",ConI 30,EList (LisT IntT))))))
     let t = LisT IntT
     let r = LisV [IntV 20; IntV 40; IntV 60]
