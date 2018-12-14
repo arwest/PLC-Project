@@ -1,6 +1,7 @@
 module ParAux
 
 open Absyn
+
 let tup =  "$tuple"
 let etup =  "()"
 let rec makeFunAux (n: int) (xs: (string * plcType) list) (e: expr) : expr = 
@@ -8,7 +9,16 @@ let rec makeFunAux (n: int) (xs: (string * plcType) list) (e: expr) : expr =
   | []     -> e
   | (x, t) :: r -> Let (x, Sel (Var tup, n), makeFunAux (n + 1) r e)  
 
-let makeType (l: (string * plcType) list): plcType = TupT (List.map (fun (x,y) -> y) l)
+let makeType (l: (string * plcType) list): plcType = 
+  match l with
+  | []          -> TupT []
+  | (x,t) :: [] -> t
+  | _           -> TupT (List.map (fun (x,y) -> y) l)
+
+let rec highReturnType (xs: (string*plcType) list list) (rt: plcType) : plcType = 
+  match xs with
+  | l :: [] -> FunT ((makeType l), rt)
+  | l :: t  -> FunT ((makeType l), (highReturnType t rt))
 
 let makeFun (f: string) (xs: (string * plcType) list) (rt: plcType) (e1: expr) (e2: expr) : expr =
   match xs with
@@ -26,4 +36,16 @@ let makeAnon (xs: (string * plcType) list) (e: expr) : expr =
   | _            -> 
    let t = makeType xs in
    let e' = makeFunAux 1 xs e in
-   Anon (tup, t, e') 
+   Anon (tup, t, e')
+
+let rec makeAnonHigh (xs: (string * plcType) list list) (e: expr) : expr =
+  match xs with
+  | []           -> makeAnon [] e
+  | args :: []   -> makeAnon args e
+  | args :: t    -> makeAnon args (makeAnonHigh t e)
+ 
+let rec makeFunHigh (f: string) (xs: (string * plcType) list list) (rt: plcType) (e1: expr) (e2: expr) : expr = 
+  match xs with
+  | []          -> makeFun f [] rt e1 e2
+  | args :: []  -> makeFun f args rt e1 e2
+  | args :: t   -> makeFun f args (highReturnType t rt) (makeAnonHigh t e1) e2

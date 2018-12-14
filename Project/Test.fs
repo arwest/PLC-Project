@@ -438,5 +438,21 @@ let cases =
     let t = BooT
     let r = BooV true
     (s, e, t, r)
+  ) :: (
+    let s = "var highAdd = fn (x:Int) (y:Int) => x + y end ; {var add3 = highAdd(3); add3 (4)}"
+    let e = Let ("highAdd",Anon ("x",IntT,Anon ("y",IntT,Prim2 ("+",Var "x",Var "y"))), Let ("add3",Call (Var "highAdd",ConI 3),Call (Var "add3",ConI 4)))
+    let t = IntT
+    let r = IntV 7
+    (s, e, t, r)
+  ) :: (
+    let s = "
+    fun rec map (f : Int -> Int) (l: List[Int]) : List[Int] =
+        if ise(l) then l else f(hd(l)) :: map(f)(tl(l))
+      ;
+    map (fn (x:Int) => 2*x end) ([10;20;30])"
+    let e = Letrec ("map","f",FunT (IntT,IntT),Anon("l",LisT IntT,If(Prim1 ("ise",Var "l"),Var "l",Prim2("::",Call (Var "f",Prim1 ("hd",Var "l")),Call (Call (Var "map",Var "f"),Prim1 ("tl",Var "l"))))),FunT (LisT IntT,LisT IntT),Call(Call (Var "map",Anon ("x",IntT,Prim2 ("*",ConI 2,Var "x"))),Prim2 ("::",ConI 10,Prim2 ("::",ConI 20,Prim2 ("::",ConI 30,EListNT)))))
+    let t = LisT IntT
+    let r = LisV [IntV 20; IntV 40; IntV 60]
+    (s, e, t, r)
   )
   :: []
