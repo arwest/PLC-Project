@@ -10,6 +10,8 @@ let rec teval (e : expr) (env : plcType env) : plcType =
     | ConB _ -> BooT
     
     | EList t -> t
+
+    | EListNT -> LisNT
     
     | Var v -> lookup env v
     
@@ -43,6 +45,7 @@ let rec teval (e : expr) (env : plcType env) : plcType =
         match (op, te1, te2) with
         | ("&&", BooT, BooT) -> BooT
         | ("::", t , LisT t') when t = t' -> LisT t
+        | ("::", t , LisNT) -> LisT t
         | ("+", IntT, IntT) -> IntT
         | ("*", IntT, IntT) -> IntT
         | ("-", IntT, IntT) -> IntT

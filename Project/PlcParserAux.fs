@@ -1,15 +1,12 @@
 module ParAux
 
 open Absyn
-open PlcChecker
 let tup =  "$tuple"
 let etup =  "()"
 let rec makeFunAux (n: int) (xs: (string * plcType) list) (e: expr) : expr = 
   match xs with
   | []     -> e
   | (x, t) :: r -> Let (x, Sel (Var tup, n), makeFunAux (n + 1) r e)  
-
-let makeListType (e: expr) : expr = EList (LisT (teval e []))
 
 let makeType (l: (string * plcType) list): plcType = TupT (List.map (fun (x,y) -> y) l)
 

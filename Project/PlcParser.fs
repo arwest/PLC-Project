@@ -1117,7 +1117,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 139 "PlcParser.fsy"
-                                                                               Prim2("::", _1, makeListType _1)
+                                                                               Prim2("::", _1, EListNT)        
                    )
 # 139 "PlcParser.fsy"
                  : 'ListComps));

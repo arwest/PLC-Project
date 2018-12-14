@@ -422,15 +422,21 @@ let cases =
         if ise(l) then l else f(hd(l)) :: map(f)(tl(l))
       end ;
     map (fn (x:Int) => 2*x end) ([10;20;30])"
-    let e = Letrec ("map","f",FunT (IntT,IntT),Anon("l",LisT IntT,If(Prim1 ("ise",Var "l"),Var "l",Prim2("::",Call (Var "f",Prim1 ("hd",Var "l")),Call (Call (Var "map",Var "f"),Prim1 ("tl",Var "l"))))),FunT (LisT IntT,LisT IntT),Call(Call (Var "map",Anon ("x",IntT,Prim2 ("*",ConI 2,Var "x"))),Prim2 ("::",ConI 10,Prim2 ("::",ConI 20,Prim2 ("::",ConI 30,EList (LisT IntT))))))
+    let e = Letrec ("map","f",FunT (IntT,IntT),Anon("l",LisT IntT,If(Prim1 ("ise",Var "l"),Var "l",Prim2("::",Call (Var "f",Prim1 ("hd",Var "l")),Call (Call (Var "map",Var "f"),Prim1 ("tl",Var "l"))))),FunT (LisT IntT,LisT IntT),Call(Call (Var "map",Anon ("x",IntT,Prim2 ("*",ConI 2,Var "x"))),Prim2 ("::",ConI 10,Prim2 ("::",ConI 20,Prim2 ("::",ConI 30,EListNT)))))
     let t = LisT IntT
     let r = LisV [IntV 20; IntV 40; IntV 60]
     (s, e, t, r)
   ) :: (
     let s = "[1;2;3;4]"
-    let e = Prim2("::", ConI 1, Prim2("::", ConI 2, Prim2("::", ConI 3, Prim2("::", ConI 4, EList (LisT IntT)))))
+    let e = Prim2("::", ConI 1, Prim2("::", ConI 2, Prim2("::", ConI 3, Prim2("::", ConI 4, EListNT))))
     let t = LisT IntT
     let r = LisV [IntV 1; IntV 2; IntV 3; IntV 4]
+    (s, e, t, r)
+  ) :: (
+    let s = "[1;2;3] = (1::2::3::([]:List[Int]))"
+    let e = Prim2("=",Prim2("::", ConI 1, Prim2("::", ConI 2, Prim2("::", ConI 3, EListNT))), Prim2 ("::",ConI 1,Prim2 ("::",ConI 2,Prim2 ("::",ConI 3, EList (LisT IntT)))))
+    let t = BooT
+    let r = BooV true
     (s, e, t, r)
   )
   :: []

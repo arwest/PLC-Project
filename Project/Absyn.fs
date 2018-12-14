@@ -9,11 +9,13 @@ type plcType =
   | TupT of plcType list                (*  Unit
                                             Tuple[type, ..., type]  *)
   | LisT of plcType                     (*  List[type]              *)
+  | LisNT
 
 type expr = 
   | ConI of int
   | ConB of bool
   | EList of plcType
+  | EListNT
   | Var of string
   | Let of string * expr * expr
   | Letrec of string * string * plcType * expr * plcType * expr

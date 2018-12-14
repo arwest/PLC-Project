@@ -10,6 +10,8 @@ let rec eval (e : expr) (env : plcVal env) : plcVal =
     | ConB b -> BooV b
     
     | EList _ -> LisV []
+
+    | EListNT -> LisV []
     
     | Var v -> lookup env v
     

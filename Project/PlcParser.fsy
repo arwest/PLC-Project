@@ -136,7 +136,7 @@ Const :
   | LPAR LBRACK RBRACK COLON Type RPAR                  { EList $5                        }
 ;
 ListComps :
-    LExpr                                               { Prim2("::", $1, makeListType $1)}
+    LExpr                                               { Prim2("::", $1, EListNT)        }
   | LExpr SEMIC ListComps                               { Prim2("::", $1, $3)             }
 ;
 Comps :
