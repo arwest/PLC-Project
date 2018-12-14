@@ -445,6 +445,12 @@ let cases =
     let r = IntV 7
     (s, e, t, r)
   ) :: (
+    let s = "var highAdd = fn (x:Int) (y:Int) => x + y end ; {var add3 = highAdd(3); add3 }"
+    let e = Let ("highAdd",Anon ("x",IntT,Anon ("y",IntT,Prim2 ("+",Var "x",Var "y"))), Let ("add3",Call (Var "highAdd",ConI 3), Var "add3"))
+    let t = FunT (IntT, IntT)
+    let r = Clos ("","y",Prim2 ("+",Var "x",Var "y"), [("x", IntV 3); ("", Clos ("","x",Anon ("y",IntT,Prim2 ("+",Var "x",Var "y")),[]))])
+    (s, e, t, r)
+  ) :: (
     let s = "
     fun rec map (f : Int -> Int) (l: List[Int]) : List[Int] =
         if ise(l) then l else f(hd(l)) :: map(f)(tl(l))

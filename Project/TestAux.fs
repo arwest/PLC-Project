@@ -33,13 +33,18 @@ let test (s:string, e:expr, t: plcType, r:plcVal) =
     let r1 = PlcInterp.eval e1 []
     if t = t1 && r = r1 && e = e1 then 0
     else
-      printfn "\nAbstract syntax mismatch for program:\n\n\"%s\"" s; 
-      printfn "\nExpected Abstract Syntax:\n%A" e;
-      printfn "\nExpected Type:\n%A" t;
-      printfn "\nExpected Result:\n%A" r; 
-      printfn "\nGenerated Abstract Syntax:\n%A" e1;
-      printfn "\nGenerated Type:\n%A" t1;
-      printfn "\nGenerated Result:\n%A" r1;        
+      if e = e1  then printfn ""
+                 else (printfn "\nAbstract syntax mismatch for program:\n\n\"%s\"" s;
+                       printfn "\nExpected Abstract Syntax:\n%A" e;
+                       printfn "\nGenerated Abstract Syntax:\n%A" e1;) 
+      if t = t1  then printfn ""
+                 else (printfn "\nType mismatch for program:\n\n\"%s\"" s;
+                       printfn "\nExpected Type:\n%A" t;
+                       printfn "\nGenerated Type:\n%A" t1;) 
+      if r = r1  then printfn ""
+                 else (printfn "\nReturn value mismatch for program:\n\n\"%s\"" s;
+                       printfn "\nExpected Result:\n%A" r; 
+                       printfn "\nGenerated Result:\n%A" r1; ) 
       1
   with 
   | exn -> let pos = lexbuf.EndPos in
