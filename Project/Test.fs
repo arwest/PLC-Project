@@ -481,5 +481,11 @@ let cases =
     let t = TupT [IntT; IntT]
     let r = TupV [IntV 4; IntV 6]
     (s, e, t, r)
+  ) :: (
+    let s = "var x = ([]:List[Int]) ; x"
+    let e = Let ("x",EList (LisT IntT),Var "x")
+    let t = LisT IntT
+    let r = LisV []
+    (s, e, t, r)
   )
   :: []
