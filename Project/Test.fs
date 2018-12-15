@@ -460,5 +460,26 @@ let cases =
     let t = LisT IntT
     let r = LisV [IntV 20; IntV 40; IntV 60]
     (s, e, t, r)
+  ) :: (
+    let s = "
+    fun rec move (l1 : List[Int]) (l2 : List[Int]) : List[Int] =
+      if ise(l1) then l2 else move (tl(l1))(hd(l1) :: l2) ;
+    move ([1;2;3]) ([4;5;6]) "
+    let e = Letrec ("move","l1",LisT IntT,Anon ("l2",LisT IntT, If (Prim1 ("ise",Var "l1"),Var "l2",Call (Call (Var "move",Prim1 ("tl",Var "l1")), Prim2 ("::",Prim1 ("hd",Var "l1"),Var "l2")))), FunT (LisT IntT,LisT IntT), Call (Call (Var "move", Prim2 ("::",ConI 1,Prim2 ("::",ConI 2,Prim2 ("::",ConI 3,EListNT)))), Prim2 ("::",ConI 4,Prim2 ("::",ConI 5,Prim2 ("::",ConI 6,EListNT)))))
+    let t = LisT IntT
+    let r = LisV [IntV 3; IntV 2; IntV 1; IntV 4; IntV 5; IntV 6]
+    (s, e, t, r)
+  ) :: (
+    let s = "fun pairAdd (x1:Int, x2:Int) (y1:Int, y2:Int) = (x1 + y1, x2 + y2) ; pairAdd (2,3) (2,3)"
+    let e = Let ("pairAdd", Anon ("$tuple",TupT [IntT; IntT], Let ("x1",Sel (Var "$tuple",1), Let ("x2",Sel (Var "$tuple",2), Anon ("$tuple",TupT [IntT; IntT], Let ("y1",Sel (Var "$tuple",1), Let ("y2",Sel (Var "$tuple",2), Tuple [Prim2 ("+",Var "x1",Var "y1"); Prim2 ("+",Var "x2",Var "y2")])))))), Call (Call (Var "pairAdd",Tuple [ConI 2; ConI 3]),Tuple [ConI 2; ConI 3]))
+    let t = TupT [IntT; IntT]
+    let r = TupV [IntV 4; IntV 6]
+    (s, e, t, r)
+  ) :: (
+    let s = "fun pairAdd (x1:Int, x2:Int) (y1:Int, y2:Int) = (x1 + y1, x2 + y2) ; {var test = pairAdd(2,3) ; test (2,3)}"
+    let e = Let ("pairAdd", Anon ("$tuple",TupT [IntT; IntT], Let ("x1",Sel (Var "$tuple",1), Let ("x2",Sel (Var "$tuple",2), Anon ("$tuple",TupT [IntT; IntT], Let ("y1",Sel (Var "$tuple",1), Let ("y2",Sel (Var "$tuple",2), Tuple [Prim2 ("+",Var "x1",Var "y1"); Prim2 ("+",Var "x2",Var "y2")])))))), Let ("test",Call (Var "pairAdd",Tuple [ConI 2; ConI 3]),Call (Var "test",Tuple [ConI 2; ConI 3])))
+    let t = TupT [IntT; IntT]
+    let r = TupV [IntV 4; IntV 6]
+    (s, e, t, r)
   )
   :: []
